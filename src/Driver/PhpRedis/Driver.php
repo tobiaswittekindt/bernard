@@ -57,7 +57,7 @@ class Driver implements \Bernard\Driver
     /**
      * {@inheritdoc}
      */
-    public function popMessage($queueName, $duration = 0.005): ?Message
+    public function popMessage($queueName, $duration = 5): ?Message
     {
         // When PhpRedis is set up with an Redis::OPT_PREFIX
         // it does set the prefix to the key and to the timeout value something like:
