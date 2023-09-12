@@ -67,7 +67,7 @@ class Driver implements \Bernard\Driver
         // "BLPOP" "bernard:queue:my-queue" "5"
         //
         // see https://github.com/nicolasff/phpredis/issues/158
-        list(, $message) = $this->redis->lpop($this->resolveKey($queueName)) ?: null;
+        $message = $this->redis->lpop($this->resolveKey($queueName)) ?: null;
 
         if(!empty($message)) {
             return new Message($message);
