@@ -87,7 +87,7 @@ class PersistentQueue extends AbstractQueue
      *
      * @param int $duration number of seconds to keep polling for messages
      */
-    public function dequeue($duration = 5)
+    public function dequeue($duration = 0.005)
     {
         $this->errorIfClosed();
 
