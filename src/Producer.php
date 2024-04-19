@@ -21,12 +21,17 @@ class Producer
     /**
      * @param string|null $queueName
      */
-    public function produce(Message $message, $queueName = null): void
+    public function produce(Message $message, $queueName = null, int $timestamp = null): void
     {
         $queueName = $queueName ?: Util::guessQueue($message);
 
         $queue = $this->queues->create($queueName);
-        $queue->enqueue($envelope = new Envelope($message));
+        if(!empty($timestamp)) {
+            $queue->enqueueInFuture($envelope = new Envelope($message), $timestamp);
+        } else {
+            $queue->enqueue($envelope = new Envelope($message));
+        }
+
 
         $this->dispatch(BernardEvents::PRODUCE, new EnvelopeEvent($envelope, $queue));
     }
